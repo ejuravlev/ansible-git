@@ -1,0 +1,10 @@
+---
+- name: Remove build deps
+  ansible.builtin.package:
+    name: '{{ git_build_deps }}'
+    state: absent
+
+- name: Remove source files
+  ansible.builtin.file:
+    path: /tmp/git-{{ git_version }}
+    state: absent

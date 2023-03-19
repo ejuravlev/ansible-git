@@ -1,0 +1,21 @@
+---
+git_version_distrib: 2.39.1
+git_gitconfig_path: C:\Program Files\Git\etc\gitconfig
+git_gitconfig_content:
+  - 'diff "astextplain"':
+      textconv: astextplain
+  - http:
+      sslBackend: openssl
+      sslCAInfo: 'C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt'
+  - core:
+      autocrlf: true
+      fscache: true
+      symlinks: false
+  - pull:
+      rebase: false
+  - credential:
+      helper: manager
+  - 'credential "https://dev.azure.com"':
+      useHttpPath: true
+  - init:
+      defaultBranch: master

@@ -1,0 +1,22 @@
+---
+- name: Ensure Chocolatey is installed
+  chocolatey.chocolatey.win_chocolatey:
+    name: chocolatey
+
+- name: Install git of version {{ git_version }}
+  chocolatey.chocolatey.win_chocolatey:
+    name: git
+    state: downgrade
+    version: '{{ git_version }}'
+  when: git_state == 'present'
+
+- name: Install latest git
+  chocolatey.chocolatey.win_chocolatey:
+    name: git
+    state: latest
+  when: git_state == 'latest'
+
+- name: Put gitconfig at {{ git_gitconfig_path }}
+  ansible.windows.win_template:
+    src: gitconfig.j2
+    dest: '{{ git_gitconfig_path }}'

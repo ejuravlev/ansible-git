@@ -1,0 +1,9 @@
+# https://docs.ansible.com/ansible-lint/rules/default_rules.html
+parseable: true
+quiet: true
+use_default_rules: true
+verbosity: 1
+skip_list:
+  - "702"
+warn_list:
+  - internal-error

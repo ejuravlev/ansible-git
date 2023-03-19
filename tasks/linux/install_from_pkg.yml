@@ -1,0 +1,11 @@
+- name: Install git from package manager specific version {{ git_version }}
+  ansible.builtin.package:
+    name: '{{ git_installation_string }}'
+    state: present
+  when: git_state == 'present'
+
+- name: Install latest git from package manager
+  ansible.builtin.package:
+    name: git
+    state: latest
+  when: git_state == 'latest'

@@ -1,0 +1,17 @@
+.vscode
+.idea
+.venv
+
+*.DS_Store
+*__pycache__
+
+
+!roles/git
+roles/*
+
+local_roles
+remote_roles
+
+*.pyc
+
+requirements.txt

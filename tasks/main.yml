@@ -1,0 +1,13 @@
+---
+- name: Collect info
+  ansible.builtin.include_tasks: facts_and_vars.yml
+
+- name: Install git
+  ansible.builtin.include_tasks:
+    file: '{{ ansible_system | lower }}/install_git.yml'
+  when: git_state == 'present' or git_state == 'latest'
+
+- name: Remove git
+  ansible.builtin.include_tasks:
+    file: '{{ ansible_system | lower }}/remove_git.yml'
+  when: git_state == 'absent'

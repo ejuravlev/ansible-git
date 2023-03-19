@@ -1,0 +1,14 @@
+- name: Set OS-specific facts
+  ansible.builtin.setup:
+    gather_subset: distribution
+  when: ansible_system is not defined or ansible_os_family is not defined
+
+- name: Set OS-specific vars
+  ansible.builtin.include_vars: '{{ lookup("ansible.builtin.first_found", params) }}'
+  vars:
+    params:
+      files:
+        - '{{ ansible_distribution | lower }}.yml'
+        - '{{ ansible_os_family | lower }}.yml'
+      paths:
+        - vars

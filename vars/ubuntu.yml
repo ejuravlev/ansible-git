@@ -1,0 +1,19 @@
+---
+git_version_distrib: '1:2.25.1-1ubuntu3'
+git_installation_string: 'git={{ git_version }}'
+git_gitconfig_path: /etc/gitconfig
+git_installation_repo: https://mirrors.edge.kernel.org/pub/software/scm/git
+git_gitconfig_content: []
+git_build_deps:
+  - gcc
+  - dh-autoreconf
+  - dh-autoreconf
+  - libcurl4-gnutls-dev
+  - libexpat1-dev
+  - gettext
+  - libz-dev
+  - libssl-dev
+  - asciidoc
+  - xmlto
+  - docbook2x
+  - install-info

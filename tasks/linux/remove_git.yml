@@ -1,0 +1,4 @@
+- name: Remove git
+  ansible.builtin.package:
+    name: git
+    state: absent

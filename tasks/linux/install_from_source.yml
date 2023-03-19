@@ -1,0 +1,36 @@
+- name: Transform debian package version to git version
+  ansible.builtin.set_fact:
+    git_version: '{{ git_version_distrib | regex_search("\d+\.\d+\.\d+") }}'
+  when: ansible_os_family | lower == 'debian'
+
+- name: Load git src and unpack
+  ansible.builtin.unarchive:
+    src: '{{ git_installation_repo }}/git-{{ git_version }}.tar.gz'
+    dest: /tmp
+    mode: 0755
+    remote_src: true
+
+- name: Install deps to build git binary
+  ansible.builtin.package:
+    name: '{{ git_build_deps }}'
+    state: present
+
+- name: Create symlink
+  ansible.builtin.file:
+    src: /usr/bin/db2x_docbook2texi
+    dest: /usr/bin/docbook2x-texi
+    owner: root
+    group: root
+    state: link
+  when: ansible_os_family | lower == 'redhat'
+
+- name: Build and install git
+  community.general.make:
+    chdir: /tmp/git-{{ git_version }}
+    target: '{{ item }}'
+    params:
+      prefix: /usr
+  loop: [ all, install ]
+  notify:
+    - Remove build deps
+    - Remove source files

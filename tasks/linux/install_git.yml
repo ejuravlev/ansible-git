@@ -1,0 +1,18 @@
+---
+- name: Install from package manager
+  ansible.builtin.include_tasks:
+    file: install_from_pkg.yml
+  when: not git_install_from_source
+
+- name: Install from source
+  ansible.builtin.include_tasks:
+    file: install_from_source.yml
+  when: git_install_from_source
+
+- name: Put gitconfig at {{ git_gitconfig_path }}
+  ansible.builtin.template:
+    src: gitconfig.j2
+    dest: '{{ git_gitconfig_path }}'
+    owner: root
+    group: root
+    mode: 0644

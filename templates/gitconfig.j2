@@ -1,0 +1,18 @@
+# Ansible managed. Don't edit it by ruchki tvoi shalovlivie
+
+{% for gitconf_section in git_gitconfig_content %}
+{% for gitconf_section_name, gitconf_section_options in gitconf_section.items() %}
+[{{ gitconf_section_name }}]
+{% filter indent(width=2) %}
+{% for k, v in gitconf_section_options.items() %}
+{% if v is sameas true %}
+  {{ k }} = true
+{% elif v is sameas false %}
+  {{ k }} = false
+{% else %}
+  {{ k }} = {{ v }}
+{% endif%}
+{% endfor %}
+{% endfilter %}
+{% endfor %}
+{% endfor%}

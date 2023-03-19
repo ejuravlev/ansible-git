@@ -1,0 +1,4 @@
+- name: Remove git
+  chocolatey.chocolatey.win_chocolatey:
+    name: git
+    state: absent
